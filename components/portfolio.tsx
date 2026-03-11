@@ -26,10 +26,82 @@ import {
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const fadeInDown = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } }
 };
 
 const textGlow = 'text-accent glow';
+
+// Animated background component
+function AnimatedBackground() {
+  return (
+    <div className="fixed inset-0 -z-50 overflow-hidden">
+      {/* Gradient Base */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950" />
+      
+      {/* Animated Grid */}
+      <motion.div
+        className="absolute inset-0 opacity-5"
+        animate={{
+          backgroundPosition: ['0px 0px', '100px 100px'],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+        style={{
+          backgroundImage:
+            'linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, 0.1) 25%, rgba(0, 255, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.1) 75%, rgba(0, 255, 255, 0.1) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.1) 25%, rgba(0, 255, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.1) 75%, rgba(0, 255, 255, 0.1) 76%, transparent 77%, transparent)',
+          backgroundSize: '100px 100px',
+        }}
+      />
+
+      {/* Animated Particles */}
+      {[...Array(12)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-cyan-400 rounded-full"
+          animate={{
+            x: Math.cos((i / 12) * Math.PI * 2) * 200,
+            y: Math.sin((i / 12) * Math.PI * 2) * 200,
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 15 + i,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          style={{
+            left: '50%',
+            top: '50%',
+            marginLeft: '-2px',
+            marginTop: '-2px',
+          }}
+        />
+      ))}
+
+      {/* Radial Glows */}
+      <motion.div
+        className="absolute -top-40 -right-40 w-96 h-96 bg-cyan-400 rounded-full"
+        animate={{ opacity: [0.03, 0.08, 0.03] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ filter: 'blur(80px)' }}
+      />
+      <motion.div
+        className="absolute bottom-0 -left-40 w-96 h-96 bg-purple-600 rounded-full"
+        animate={{ opacity: [0.02, 0.06, 0.02] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        style={{ filter: 'blur(80px)' }}
+      />
+    </div>
+  );
+}
 
 export default function Portfolio() {
   useEffect(() => {
@@ -37,11 +109,13 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <main className="overflow-x-hidden">
+    <>
+      <AnimatedBackground />
+      <main className="overflow-x-hidden relative z-10">
       {/* Hero Section */}
       <section
         id="hero"
-        className="min-h-screen flex items-center justify-center px-6 md:px-8 py-20"
+        className="min-h-screen flex items-center justify-center px-6 md:px-8 py-20 relative"
       >
         <div className="w-full max-w-6xl">
           <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -59,6 +133,7 @@ export default function Portfolio() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
+                    className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-white to-cyan-400"
                   >
                     ALI EISSA
                   </motion.h1>
@@ -70,7 +145,7 @@ export default function Portfolio() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                   >
-                    Penetration Tester focused on web and network security
+                    Elite Penetration Tester specializing in web and network security assessments
                   </motion.p>
                 </div>
                 <div className="flex gap-4 justify-center md:justify-start flex-wrap">
@@ -79,16 +154,17 @@ export default function Portfolio() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
+                    className="flex gap-4 flex-wrap"
                   >
                     <a
                       href="#projects"
-                      className="px-8 py-3 bg-accent text-black rounded-lg font-semibold hover:scale-105 transform transition duration-300 shadow-lg shadow-cyan-400/20"
+                      className="px-8 py-3 bg-accent text-black rounded-lg font-semibold hover:scale-105 transform transition duration-300 shadow-lg shadow-cyan-400/30 hover:shadow-cyan-400/50"
                     >
                       Explore Projects
                     </a>
                     <a
                       href="#contact"
-                      className="px-8 py-3 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-black transition duration-300 shadow-lg shadow-cyan-400/10"
+                      className="px-8 py-3 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-black transition duration-300 shadow-lg shadow-cyan-400/10 hover:shadow-cyan-400/30"
                     >
                       Contact
                     </a>
@@ -97,7 +173,7 @@ export default function Portfolio() {
               </motion.div>
             </div>
 
-            {/* Profile Image with Cyber Effects */}
+            {/* Profile Image with Premium Cyber Effects */}
             <div className="flex justify-center md:justify-end">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -106,50 +182,50 @@ export default function Portfolio() {
                 transition={{ duration: 0.7, delay: 0.1 }}
               >
                 <div className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80">
-                  {/* Outer Pulsing Glow Ring */}
+                  {/* Outer Premium Pulsing Glow Ring */}
                   <motion.div
                     className="absolute inset-0 rounded-full"
                     style={{
-                      boxShadow: '0 0 40px rgba(0, 255, 255, 0.4), 0 0 80px rgba(0, 255, 255, 0.2)'
+                      boxShadow: '0 0 60px rgba(0, 255, 255, 0.5), 0 0 120px rgba(0, 255, 255, 0.3)'
                     }}
                     animate={{
                       boxShadow: [
-                        '0 0 40px rgba(0, 255, 255, 0.3), 0 0 80px rgba(0, 255, 255, 0.15)',
-                        '0 0 60px rgba(0, 255, 255, 0.5), 0 0 100px rgba(0, 255, 255, 0.25)',
-                        '0 0 40px rgba(0, 255, 255, 0.3), 0 0 80px rgba(0, 255, 255, 0.15)'
+                        '0 0 50px rgba(0, 255, 255, 0.4), 0 0 100px rgba(0, 255, 255, 0.2)',
+                        '0 0 80px rgba(0, 255, 255, 0.6), 0 0 150px rgba(0, 255, 255, 0.3)',
+                        '0 0 50px rgba(0, 255, 255, 0.4), 0 0 100px rgba(0, 255, 255, 0.2)'
                       ]
                     }}
                     transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                   />
 
-                  {/* Rotating Border Ring */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 p-1">
+                  {/* Rotating Premium Border Ring */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 p-1 opacity-90">
                     <motion.div
                       className="w-full h-full rounded-full bg-gray-900"
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+                      transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
                     />
                   </div>
 
-                  {/* Floating Squares - Decorative Elements */}
+                  {/* Floating Squares - Enhanced Decorative Elements */}
                   {[
-                    { pos: '-top-3 -left-3', x: [0, 8, 0], y: [0, -8, 0], delay: 0 },
-                    { pos: '-top-3 -right-3', x: [0, -8, 0], y: [0, -8, 0], delay: 0.5 },
-                    { pos: '-bottom-3 -left-3', x: [0, 8, 0], y: [0, 8, 0], delay: 1 },
-                    { pos: '-bottom-3 -right-3', x: [0, -8, 0], y: [0, 8, 0], delay: 1.5 },
-                    { pos: 'top-1/2 left-0 -translate-y-1/2', x: [0, -12, 0], y: [0, 0, 0], delay: 0.3 },
-                    { pos: 'top-1/2 right-0 -translate-y-1/2', x: [0, 12, 0], y: [0, 0, 0], delay: 0.8 }
+                    { pos: '-top-4 -left-4', x: [0, 10, 0], y: [0, -10, 0], delay: 0 },
+                    { pos: '-top-4 -right-4', x: [0, -10, 0], y: [0, -10, 0], delay: 0.5 },
+                    { pos: '-bottom-4 -left-4', x: [0, 10, 0], y: [0, 10, 0], delay: 1 },
+                    { pos: '-bottom-4 -right-4', x: [0, -10, 0], y: [0, 10, 0], delay: 1.5 },
+                    { pos: 'top-1/2 left-0 -translate-y-1/2', x: [0, -15, 0], y: [0, 0, 0], delay: 0.3 },
+                    { pos: 'top-1/2 right-0 -translate-y-1/2', x: [0, 15, 0], y: [0, 0, 0], delay: 0.8 }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
-                      className={`absolute w-2 h-2 bg-cyan-400/60 rounded-sm ${item.pos}`}
+                      className={`absolute w-2.5 h-2.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-sm ${item.pos} shadow-lg shadow-cyan-400/50`}
                       animate={{
                         x: item.x,
                         y: item.y,
-                        opacity: [0.4, 0.8, 0.4]
+                        opacity: [0.5, 0.9, 0.5]
                       }}
                       transition={{
-                        duration: 3,
+                        duration: 3.5,
                         repeat: Infinity,
                         delay: item.delay,
                         ease: 'easeInOut'
@@ -157,8 +233,8 @@ export default function Portfolio() {
                     />
                   ))}
 
-                  {/* Inner Container */}
-                  <div className="absolute inset-1 rounded-full overflow-hidden border border-cyan-400/50">
+                  {/* Inner Container with Premium Border */}
+                  <div className="absolute inset-1 rounded-full overflow-hidden border-2 border-cyan-400/70 shadow-inner shadow-cyan-400/20">
                     {/* Profile Image - Unchanged */}
                     <Image
                       src="/ali.jpg"
@@ -169,39 +245,39 @@ export default function Portfolio() {
                       priority
                     />
 
-                    {/* Soft Inner Glow Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/10 to-transparent rounded-full" />
+                    {/* Premium Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/20 via-transparent to-cyan-400/10 rounded-full" />
                   </div>
 
-                  {/* Animated Corner Accents */}
+                  {/* Premium Animated Corner Accents */}
                   {[
-                    { pos: 'top-2 left-2', delay: 0 },
-                    { pos: 'top-2 right-2', delay: 0.5 },
-                    { pos: 'bottom-2 left-2', delay: 1 },
-                    { pos: 'bottom-2 right-2', delay: 1.5 }
+                    { pos: 'top-3 left-3', delay: 0 },
+                    { pos: 'top-3 right-3', delay: 0.5 },
+                    { pos: 'bottom-3 left-3', delay: 1 },
+                    { pos: 'bottom-3 right-3', delay: 1.5 }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
-                      className={`absolute w-2 h-2 border border-cyan-400 ${item.pos}`}
-                      animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
+                      className={`absolute w-2.5 h-2.5 border-2 border-cyan-400 ${item.pos}`}
+                      animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.3, 1] }}
                       transition={{ duration: 2.5, repeat: Infinity, delay: item.delay, ease: 'easeInOut' }}
                     />
                   ))}
 
-                  {/* Soft Shadow Glow */}
+                  {/* Enhanced Shadow Glow */}
                   <motion.div
                     className="absolute inset-0 rounded-full"
                     style={{
-                      boxShadow: '0 0 60px rgba(0, 255, 255, 0.2), 0 0 100px rgba(0, 255, 255, 0.1)'
+                      boxShadow: '0 0 80px rgba(0, 255, 255, 0.3), 0 0 120px rgba(0, 255, 255, 0.15)'
                     }}
                     animate={{
                       boxShadow: [
-                        '0 0 50px rgba(0, 255, 255, 0.15), 0 0 80px rgba(0, 255, 255, 0.08)',
-                        '0 0 70px rgba(0, 255, 255, 0.25), 0 0 120px rgba(0, 255, 255, 0.12)',
-                        '0 0 50px rgba(0, 255, 255, 0.15), 0 0 80px rgba(0, 255, 255, 0.08)'
+                        '0 0 70px rgba(0, 255, 255, 0.2), 0 0 100px rgba(0, 255, 255, 0.1)',
+                        '0 0 100px rgba(0, 255, 255, 0.35), 0 0 150px rgba(0, 255, 255, 0.18)',
+                        '0 0 70px rgba(0, 255, 255, 0.2), 0 0 100px rgba(0, 255, 255, 0.1)'
                       ]
                     }}
-                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                    transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
                   />
                 </div>
               </motion.div>
@@ -213,14 +289,15 @@ export default function Portfolio() {
       {/* About Section */}
       <section
         id="about"
-        className="py-16 px-4 max-w-3xl mx-auto"
+        className="py-20 px-4 max-w-3xl mx-auto border-y border-cyan-400/10"
       >
-        <div className="text-3xl font-semibold mb-6 text-center glow">
+        <div className="text-3xl font-semibold mb-8 text-center">
           <motion.h2
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
+            className="text-cyan-400 glow"
           >
             About Me
           </motion.h2>
@@ -231,6 +308,7 @@ export default function Portfolio() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
+            className="text-gray-300 bg-gradient-to-r from-cyan-400/5 to-transparent rounded-lg p-6 border border-cyan-400/10"
           >
             I am a cybersecurity graduate with 4 years of learning and hands-on
             practice in cybersecurity. I chose this field because I have a real
@@ -244,19 +322,20 @@ export default function Portfolio() {
       {/* Skills / Toolkit Section */}
       <section
         id="skills"
-        className="py-12 px-4 bg-gray-800"
+        className="py-20 px-4 bg-gradient-to-b from-dark to-gray-800/50 border-y border-cyan-400/10"
       >
-        <div className="text-3xl font-semibold mb-3 text-center glow">
+        <div className="text-3xl font-semibold mb-3 text-center">
           <motion.h2
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
+            className="text-cyan-400 glow"
           >
             Skills &amp; Toolkit
           </motion.h2>
         </div>
-        <div className="max-w-3xl mx-auto text-center mb-6">
+        <div className="max-w-3xl mx-auto text-center mb-8">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -267,7 +346,7 @@ export default function Portfolio() {
             </p>
           </motion.div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-w-4xl mx-auto">
           {[
             'Python',
             'JavaScript',
@@ -290,7 +369,7 @@ export default function Portfolio() {
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              <div className="px-3 py-1.5 bg-gray-700/50 hover:bg-gray-700 rounded-full text-center text-xs font-medium transition">
+              <div className="px-3 py-2 bg-gradient-to-r from-cyan-400/10 to-purple-600/5 hover:from-cyan-400/20 hover:to-purple-600/10 rounded-full text-center text-xs font-medium transition border border-cyan-400/20 hover:border-cyan-400/50 cursor-pointer">
                 {skill}
               </div>
             </motion.div>
@@ -299,18 +378,19 @@ export default function Portfolio() {
       </section>
 
       {/* Vulnerability Expertise */}
-      <section id="vulnerability-focus" className="py-12 px-4">
-        <div className="text-3xl font-semibold mb-3 text-center glow">
+      <section id="vulnerability-focus" className="py-20 px-4 border-y border-cyan-400/10">
+        <div className="text-3xl font-semibold mb-3 text-center">
           <motion.h2
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
+            className="text-cyan-400 glow"
           >
             Vulnerability Expertise
           </motion.h2>
         </div>
-        <p className="text-center text-gray-400 text-sm mb-6">Hands-on practice across OWASP Top 10 categories</p>
+        <p className="text-center text-gray-400 text-sm mb-8">Hands-on practice across OWASP Top 10 categories</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-5xl mx-auto">
           {[
             { name: 'SQL Injection', labs: '15 labs', difficulty: 'Advanced' },
@@ -328,12 +408,13 @@ export default function Portfolio() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInUp}
+              whileHover={{ y: -4 }}
             >
-              <div className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 hover:border-cyan-400/60 transition">
-                <motion.div whileHover={{ scale: 1.02 }}>
-                  <p className="font-semibold text-sm">{vuln.name}</p>
-                  <p className="text-xs text-cyan-400 mt-1">{vuln.labs}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{vuln.difficulty}</p>
+              <div className="bg-gradient-to-br from-cyan-400/10 to-purple-600/5 hover:from-cyan-400/15 hover:to-purple-600/10 rounded-lg p-4 border border-cyan-400/30 hover:border-cyan-400/70 transition shadow-lg shadow-cyan-400/5 hover:shadow-cyan-400/20">
+                <motion.div whileHover={{ scale: 1.03 }}>
+                  <p className="font-semibold text-sm text-white">{vuln.name}</p>
+                  <p className="text-xs text-cyan-400 mt-2 font-medium">{vuln.labs}</p>
+                  <p className="text-xs text-gray-500 mt-1">{vuln.difficulty}</p>
                 </motion.div>
               </div>
             </motion.div>
@@ -342,18 +423,19 @@ export default function Portfolio() {
       </section>
 
       {/* Testing Methodology Section */}
-      <section id="methodology" className="py-12 px-4 bg-gray-800">
-        <div className="text-3xl font-semibold mb-3 text-center glow">
+      <section id="methodology" className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-dark border-y border-cyan-400/10">
+        <div className="text-3xl font-semibold mb-3 text-center">
           <motion.h2
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
+            className="text-cyan-400 glow"
           >
             Testing Methodology
           </motion.h2>
         </div>
-        <div className="max-w-3xl mx-auto text-center mb-6">
+        <div className="max-w-3xl mx-auto text-center mb-10">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -393,13 +475,14 @@ export default function Portfolio() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInUp}
+              whileHover={{ y: -4 }}
             >
-              <div className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border-l-4 border-cyan-400 transition">
-                <div className="flex items-center mb-1.5">
-                  <span className="text-cyan-400 font-bold text-sm mr-2">{i + 1}</span>
+              <div className="bg-gradient-to-br from-cyan-400/10 to-blue-600/5 hover:from-cyan-400/20 hover:to-blue-600/10 rounded-lg p-4 border-l-4 border-cyan-400 transition shadow-lg shadow-cyan-400/5 hover:shadow-cyan-400/20">
+                <div className="flex items-center mb-2">
+                  <span className="text-cyan-400 font-bold text-sm mr-2 bg-cyan-400/20 w-6 h-6 rounded flex items-center justify-center">{i + 1}</span>
                   <h3 className="font-semibold text-sm">{item.step}</h3>
                 </div>
-                <p className="text-xs text-gray-400">{item.desc}</p>
+                <p className="text-xs text-gray-300">{item.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -460,21 +543,23 @@ export default function Portfolio() {
             ))}
           </div>
         </motion.div>
+        </div>
       </section>
 
       {/* Pentesting Timeline */}
-      <section id="timeline" className="py-12 px-4 bg-gray-800">
-        <div className="text-3xl font-semibold mb-3 text-center glow">
+      <section id="timeline" className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-dark border-y border-cyan-400/10">
+        <div className="text-3xl font-semibold mb-3 text-center">
           <motion.h2
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
+            className="text-cyan-400 glow"
           >
             Pentesting Timeline
           </motion.h2>
         </div>
-        <div className="max-w-3xl mx-auto text-center mb-6">
+        <div className="max-w-3xl mx-auto text-center mb-10">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -493,7 +578,7 @@ export default function Portfolio() {
             { date: '2024', event: 'TryHackMe Top 5% · 55 Rooms', type: 'Hands-On' },
             { date: '2024–2026', event: 'PortSwigger Labs: 61 Labs Complete', type: 'Advanced Lab' }
           ].map((item, i) => (
-            <div key={i} className="flex gap-4 mb-5">
+            <div key={i} className="flex gap-4 mb-6">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -501,13 +586,13 @@ export default function Portfolio() {
                 transition={{ delay: i * 0.1 }}
               >
                 <div className="flex flex-col items-center flex-shrink-0">
-                  <div className="w-3 h-3 bg-cyan-400 rounded-full border border-cyan-400/50"></div>
-                  {i < 4 && <div className="w-0.5 h-16 bg-gradient-to-b from-cyan-400/50 to-transparent my-1.5"></div>}
+                  <div className="w-3.5 h-3.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full border-2 border-cyan-400/50 shadow-lg shadow-cyan-400/50"></div>
+                  {i < 4 && <div className="w-0.5 h-20 bg-gradient-to-b from-cyan-400/50 to-transparent my-2"></div>}
                 </div>
                 <div>
                   <p className="font-semibold text-cyan-400 text-sm">{item.date}</p>
-                  <p className="text-gray-300 text-sm">{item.event}</p>
-                  <p className="text-xs text-gray-500">{item.type}</p>
+                  <p className="text-gray-200 text-sm font-medium">{item.event}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{item.type}</p>
                 </div>
               </motion.div>
             </div>
@@ -516,9 +601,9 @@ export default function Portfolio() {
       </section>
 
       {/* Certifications */}
-      <section id="certifications" className="py-12 px-4">
+      <section id="certifications" className="py-20 px-4 border-y border-cyan-400/10">
         <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
+          className="text-3xl font-semibold mb-3 text-center text-cyan-400 glow"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -527,7 +612,7 @@ export default function Portfolio() {
           Certifications
         </motion.h2>
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
+          className="max-w-3xl mx-auto text-center mb-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -537,7 +622,7 @@ export default function Portfolio() {
           </p>
         </motion.div>
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-w-4xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -563,18 +648,20 @@ export default function Portfolio() {
               value: 'Security operations and threat analysis'
             }
           ].map((cert) => (
-            <div key={cert.cert} className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 transition">
-              <motion.div whileHover={{ scale: 1.02 }}>
-                <div className="flex items-start mb-2">
-                  <Award className="w-4 h-4 text-cyan-400 mr-2 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-sm">{cert.cert}</h4>
-                    <p className="text-xs text-gray-500">{cert.issuer} · {cert.year}</p>
+            <motion.div key={cert.cert} whileHover={{ y: -4 }}>
+              <div className="bg-gradient-to-br from-cyan-400/10 to-purple-600/5 hover:from-cyan-400/20 hover:to-purple-600/10 rounded-lg p-4 border border-cyan-400/30 hover:border-cyan-400/70 transition shadow-lg shadow-cyan-400/5 hover:shadow-cyan-400/20">
+                <motion.div whileHover={{ scale: 1.03 }}>
+                  <div className="flex items-start mb-3">
+                    <Award className="w-5 h-5 text-cyan-400 mr-2 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-sm text-white">{cert.cert}</h4>
+                      <p className="text-xs text-gray-400">{cert.issuer} · {cert.year}</p>
+                    </div>
                   </div>
-                </div>
-                <p className="text-xs text-gray-400">{cert.value}</p>
-              </motion.div>
-            </div>
+                  <p className="text-xs text-gray-300">{cert.value}</p>
+                </motion.div>
+              </div>
+            </motion.div>
           ))}
         </motion.div>
       </section>
@@ -720,9 +807,9 @@ export default function Portfolio() {
       </section>
 
       {/* Bug Bounty & Vulnerability Disclosure */}
-      <section id="bug-bounty" className="py-12 px-4 bg-gray-800">
+      <section id="bug-bounty" className="py-20 px-4 bg-gradient-to-b from-dark to-gray-800/50 border-y border-cyan-400/10">
         <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
+          className="text-3xl font-semibold mb-3 text-center text-cyan-400 glow"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -731,7 +818,7 @@ export default function Portfolio() {
           Bug Bounty & Vulnerability Reporting
         </motion.h2>
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
+          className="max-w-3xl mx-auto text-center mb-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -741,27 +828,27 @@ export default function Portfolio() {
           </p>
         </motion.div>
         <motion.div
-          className="max-w-2xl mx-auto bg-gray-700/50 rounded-lg p-4 border border-cyan-400/30"
+          className="max-w-2xl mx-auto bg-gradient-to-br from-cyan-400/10 to-purple-600/5 rounded-lg p-6 border border-cyan-400/30 hover:border-cyan-400/70 transition shadow-lg shadow-cyan-400/5"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="grid grid-cols-3 gap-3 mb-4">
+          <div className="grid grid-cols-3 gap-4 mb-6">
             {[
               { label: 'Platform', value: 'HackerOne' },
               { label: 'Reports', value: '2' },
               { label: 'Severity', value: 'Low, Medium' }
             ].map((item) => (
-              <div key={item.label} className="text-center">
-                <p className="text-lg font-bold text-cyan-400 mb-0.5">{item.value}</p>
+              <div key={item.label} className="text-center bg-cyan-400/5 rounded-lg p-3 border border-cyan-400/20">
+                <p className="text-lg font-bold text-cyan-400 mb-1">{item.value}</p>
                 <p className="text-xs text-gray-400">{item.label}</p>
               </div>
             ))}
           </div>
-          <div className="border-t border-cyan-400/20 pt-3">
-            <h4 className="font-semibold text-sm mb-1.5">Reported Vulnerabilities</h4>
-            <p className="text-xs text-gray-400 leading-relaxed">
+          <div className="border-t border-cyan-400/20 pt-4">
+            <h4 className="font-semibold text-sm mb-2 text-white">Reported Vulnerabilities</h4>
+            <p className="text-xs text-gray-300 leading-relaxed">
               Actively disclosing vulnerabilities on HackerOne focusing on web application flaws. Current program: <span className="text-cyan-400 font-semibold">Webshop</span>
             </p>
           </div>
@@ -818,9 +905,9 @@ export default function Portfolio() {
       </section>
 
       {/* Writeups & Lab Notes - In Progress */}
-      <section id="writeups" className="py-12 px-4 bg-gray-800">
+      <section id="writeups" className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-dark border-y border-cyan-400/10">
         <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
+          className="text-3xl font-semibold mb-3 text-center text-cyan-400 glow"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -829,7 +916,7 @@ export default function Portfolio() {
           Writeups & Technical Analysis
         </motion.h2>
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
+          className="max-w-3xl mx-auto text-center mb-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -839,7 +926,7 @@ export default function Portfolio() {
           </p>
         </motion.div>
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-4xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -853,27 +940,28 @@ export default function Portfolio() {
             { topic: 'Access Control & IDOR', status: 'Planned', complexity: 'Intermediate', detail: 'Horizontal & vertical escalation' },
             { topic: 'CSRF Token Bypass', status: 'Planned', complexity: 'Intermediate', detail: 'Request forgery & token manipulation' }
           ].map((writeup) => (
-            <div
+            <motion.div
               key={writeup.topic}
-              className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 transition"
+              className="bg-gradient-to-br from-cyan-400/10 to-purple-600/5 hover:from-cyan-400/20 hover:to-purple-600/10 rounded-lg p-4 border border-cyan-400/30 hover:border-cyan-400/70 transition shadow-lg shadow-cyan-400/5 hover:shadow-cyan-400/20"
+              whileHover={{ y: -3 }}
             >
               <div className="flex justify-between items-start mb-2">
-                <h4 className="font-semibold text-sm">{writeup.topic}</h4>
-                <span className={`px-2 py-0.5 rounded text-xs font-medium ${writeup.status === 'In Progress' ? 'bg-cyan-400/20 text-cyan-400' : 'bg-gray-600 text-gray-400'}`}>
+                <h4 className="font-semibold text-sm text-white">{writeup.topic}</h4>
+                <span className={`px-2.5 py-1 rounded text-xs font-medium ${writeup.status === 'In Progress' ? 'bg-cyan-400/20 text-cyan-400 border border-cyan-400/50' : 'bg-gray-600/40 text-gray-400 border border-gray-500/50'}`}>
                   {writeup.status}
                 </span>
               </div>
-              <p className="text-xs text-gray-400 mb-1">{writeup.detail}</p>
-              <span className="text-xs text-gray-500">{writeup.complexity}</span>
-            </div>
+              <p className="text-xs text-gray-300 mb-2">{writeup.detail}</p>
+              <span className="text-xs text-gray-500 font-medium">{writeup.complexity}</span>
+            </motion.div>
           ))}
         </motion.div>
       </section>
 
       {/* Lab Tracker - Learning Progress */}
-      <section id="lab-tracker" className="py-12 px-4">
+      <section id="lab-tracker" className="py-20 px-4 border-y border-cyan-400/10">
         <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
+          className="text-3xl font-semibold mb-3 text-center text-cyan-400 glow"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -882,7 +970,7 @@ export default function Portfolio() {
           Lab Tracker & Learning Paths
         </motion.h2>
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
+          className="max-w-3xl mx-auto text-center mb-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -979,9 +1067,9 @@ export default function Portfolio() {
       </section>
 
       {/* Vulnerability Showcase - Specialization Map */}
-      <section id="vulnerability-showcase" className="py-12 px-4 bg-gray-800">
+      <section id="vulnerability-showcase" className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-dark border-y border-cyan-400/10">
         <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
+          className="text-3xl font-semibold mb-3 text-center text-cyan-400 glow"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -990,7 +1078,7 @@ export default function Portfolio() {
           Vulnerability Specializations
         </motion.h2>
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
+          className="max-w-3xl mx-auto text-center mb-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -1018,20 +1106,20 @@ export default function Portfolio() {
           ].map((item) => (
             <motion.div
               key={item.vuln}
-              className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border-l-4 border-cyan-400 transition"
-              whileHover={{ scale: 1.03 }}
+              className="bg-gradient-to-br from-cyan-400/10 to-blue-600/5 hover:from-cyan-400/20 hover:to-blue-600/10 rounded-lg p-3 border-l-4 border-cyan-400 transition shadow-lg shadow-cyan-400/5 hover:shadow-cyan-400/20"
+              whileHover={{ scale: 1.05, y: -2 }}
             >
-              <h4 className="font-semibold text-xs mb-1">{item.vuln}</h4>
-              <p className="text-xs text-gray-400">{item.focus}</p>
+              <h4 className="font-semibold text-xs mb-1 text-white">{item.vuln}</h4>
+              <p className="text-xs text-gray-300">{item.focus}</p>
             </motion.div>
           ))}
         </motion.div>
       </section>
 
       {/* Attack Surface Map */}
-      <section id="attack-surface" className="py-12 px-4">
+      <section id="attack-surface" className="py-20 px-4 border-y border-cyan-400/10">
         <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
+          className="text-3xl font-semibold mb-3 text-center text-cyan-400 glow"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -1040,7 +1128,7 @@ export default function Portfolio() {
           Attack Surface Methodology
         </motion.h2>
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
+          className="max-w-3xl mx-auto text-center mb-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -1050,7 +1138,7 @@ export default function Portfolio() {
           </p>
         </motion.div>
         <motion.div
-          className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3"
+          className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -1066,17 +1154,17 @@ export default function Portfolio() {
           ].map((attack) => (
             <motion.div
               key={attack.area}
-              className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 transition"
-              whileHover={{ scale: 1.02 }}
+              className="bg-gradient-to-br from-cyan-400/10 to-purple-600/5 hover:from-cyan-400/20 hover:to-purple-600/10 rounded-lg p-4 border border-cyan-400/30 hover:border-cyan-400/70 transition shadow-lg shadow-cyan-400/5 hover:shadow-cyan-400/20"
+              whileHover={{ y: -4 }}
             >
-              <h4 className="flex items-center font-semibold mb-2 text-sm">
-                <Target className="w-3.5 h-3.5 mr-1.5 text-cyan-400" />
+              <h4 className="flex items-center font-semibold mb-3 text-sm text-white">
+                <Target className="w-4 h-4 mr-2 text-cyan-400" />
                 {attack.area}
               </h4>
-              <ul className="space-y-1">
+              <ul className="space-y-1.5">
                 {attack.details.map((detail) => (
                   <li key={detail} className="text-xs text-gray-300 flex items-start">
-                    <span className="text-cyan-400 mr-1.5 flex-shrink-0">→</span>
+                    <span className="text-cyan-400 mr-2 flex-shrink-0 font-bold">→</span>
                     {detail}
                   </li>
                 ))}
@@ -1087,9 +1175,9 @@ export default function Portfolio() {
       </section>
 
       {/* Skill Progress */}
-      <section id="progress" className="py-12 px-4 bg-gray-800">
+      <section id="progress" className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-dark border-y border-cyan-400/10">
         <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
+          className="text-3xl font-semibold mb-3 text-center text-cyan-400 glow"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -1098,7 +1186,7 @@ export default function Portfolio() {
           Technical Skill Progress
         </motion.h2>
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
+          className="max-w-3xl mx-auto text-center mb-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -1108,7 +1196,7 @@ export default function Portfolio() {
           </p>
         </motion.div>
         <motion.div
-          className="space-y-4 max-w-3xl mx-auto"
+          className="space-y-5 max-w-3xl mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -1122,23 +1210,23 @@ export default function Portfolio() {
             { label: 'Exploitation & Payloads', value: 82, description: 'SQLmap, Metasploit, custom exploits' },
             { label: 'Security Reporting', value: 75, description: 'Documentation and communication' }
           ].map((item) => (
-            <div key={item.label}>
-              <div className="flex justify-between mb-1">
+            <div key={item.label} className="bg-gradient-to-r from-cyan-400/5 to-transparent rounded-lg p-4 border border-cyan-400/10">
+              <div className="flex justify-between mb-2">
                 <div>
-                  <span className="font-medium text-xs">{item.label}</span>
-                  <p className="text-xs text-gray-500">{item.description}</p>
+                  <span className="font-medium text-sm text-white">{item.label}</span>
+                  <p className="text-xs text-gray-500 mt-0.5">{item.description}</p>
                 </div>
-                <span className="text-xs font-semibold text-cyan-400">{item.value}%</span>
+                <span className="text-sm font-bold text-cyan-400">{item.value}%</span>
               </div>
               <motion.div
-                className="w-full bg-gray-700 rounded-full h-2 overflow-hidden"
+                className="w-full bg-gray-800 rounded-full h-2 overflow-hidden border border-cyan-400/20"
                 initial={{ width: 0 }}
                 whileInView={{ width: '100%' }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
                 <motion.div
-                  className="bg-gradient-to-r from-cyan-400 to-blue-500 h-2 rounded-full"
+                  className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-300 rounded-full shadow-lg shadow-cyan-400/50"
                   initial={{ width: 0 }}
                   whileInView={{ width: `${item.value}%` }}
                   viewport={{ once: true }}
@@ -1151,9 +1239,9 @@ export default function Portfolio() {
       </section>
 
       {/* Services */}
-      <section id="services" className="py-12 px-4">
+      <section id="services" className="py-20 px-4 border-y border-cyan-400/10">
         <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
+          className="text-3xl font-semibold mb-3 text-center text-cyan-400 glow"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -1162,7 +1250,7 @@ export default function Portfolio() {
           Services & Consulting
         </motion.h2>
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
+          className="max-w-3xl mx-auto text-center mb-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -1172,7 +1260,7 @@ export default function Portfolio() {
           </p>
         </motion.div>
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-w-5xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -1197,27 +1285,28 @@ export default function Portfolio() {
           ].map((svc) => {
             const Icon = svc.icon;
             return (
-              <div
+              <motion.div
                 key={svc.service}
-                className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 transition"
+                className="bg-gradient-to-br from-cyan-400/10 to-purple-600/5 hover:from-cyan-400/20 hover:to-purple-600/10 rounded-lg p-4 border border-cyan-400/30 hover:border-cyan-400/70 transition shadow-lg shadow-cyan-400/5 hover:shadow-cyan-400/20"
+                whileHover={{ y: -4 }}
               >
-                <motion.div whileHover={{ scale: 1.02 }}>
-                  <div className="flex items-center mb-2">
-                    <Icon className="w-4 h-4 text-cyan-400 mr-2" />
-                    <h4 className="font-semibold text-sm">{svc.service}</h4>
+                <motion.div whileHover={{ scale: 1.03 }}>
+                  <div className="flex items-center mb-3">
+                    <Icon className="w-5 h-5 text-cyan-400 mr-2" />
+                    <h4 className="font-semibold text-sm text-white">{svc.service}</h4>
                   </div>
-                  <p className="text-xs text-gray-400">{svc.description}</p>
+                  <p className="text-xs text-gray-300 leading-relaxed">{svc.description}</p>
                 </motion.div>
-              </div>
+              </motion.div>
             );
           })}
         </motion.div>
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-12 px-4">
+      <section id="contact" className="py-20 px-4 bg-gradient-to-b from-dark to-gray-900 border-t border-cyan-400/10">
         <motion.h2
-          className="text-3xl font-semibold mb-6 text-center glow"
+          className="text-3xl font-semibold mb-8 text-center text-cyan-400 glow"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -1225,57 +1314,59 @@ export default function Portfolio() {
         >
           Get in Touch
         </motion.h2>
-        <div className="flex flex-col items-center space-y-2.5">
+        <div className="flex flex-col items-center space-y-3">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
+            className="space-y-3 w-full max-w-md"
           >
             <a
               href="mailto:ali.eissa.cybersec@gmail.com"
-              className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
+              className="flex items-center space-x-3 text-sm hover:text-cyan-400 transition p-3 rounded-lg bg-cyan-400/5 border border-cyan-400/20 hover:border-cyan-400/50 hover:bg-cyan-400/10 group"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition" />
               <span>ali.eissa.cybersec@gmail.com</span>
             </a>
             <a
               href="https://wa.me/201021068767"
-              className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
+              className="flex items-center space-x-3 text-sm hover:text-cyan-400 transition p-3 rounded-lg bg-cyan-400/5 border border-cyan-400/20 hover:border-cyan-400/50 hover:bg-cyan-400/10 group"
             >
-              <Smartphone className="w-4 h-4" />
+              <Smartphone className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition" />
               <span>+201021068767</span>
             </a>
             <a
               href="https://www.linkedin.com/in/ali-eissa-cyber"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
+              className="flex items-center space-x-3 text-sm hover:text-cyan-400 transition p-3 rounded-lg bg-cyan-400/5 border border-cyan-400/20 hover:border-cyan-400/50 hover:bg-cyan-400/10 group"
             >
-              <Linkedin className="w-4 h-4" />
+              <Linkedin className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition" />
               <span>LinkedIn</span>
             </a>
             <a
               href="https://github.com/ali-cybersec-sudo"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
+              className="flex items-center space-x-3 text-sm hover:text-cyan-400 transition p-3 rounded-lg bg-cyan-400/5 border border-cyan-400/20 hover:border-cyan-400/50 hover:bg-cyan-400/10 group"
             >
-              <Github className="w-4 h-4" />
+              <Github className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition" />
               <span>GitHub</span>
             </a>
             <a
               href="/ALI_EISSA.pdf"
               download
-              className="mt-3 px-4 py-2 bg-accent text-black rounded-md font-semibold text-sm hover:scale-105 transform transition inline-flex items-center"
+              className="mt-4 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-400 text-black rounded-lg font-semibold text-sm hover:scale-105 transform transition shadow-lg shadow-cyan-400/30 hover:shadow-cyan-400/50 inline-flex items-center justify-center w-full group"
             >
-              <Download className="w-3.5 h-3.5 mr-1.5" />
+              <Download className="w-4 h-4 mr-2 group-hover:translate-y-1 transition" />
               Download CV
             </a>
           </motion.div>
         </div>
       </section>
     </main>
+    </>
   );
 }
 
@@ -1292,19 +1383,19 @@ function ProjectCard({
 }) {
   return (
     <motion.div
-      className="bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg p-6 border border-cyan-400/20 hover:border-cyan-400/50 transition h-full"
-      whileHover={{ scale: 1.02 }}
+      className="bg-gradient-to-br from-cyan-400/10 to-purple-600/5 hover:from-cyan-400/20 hover:to-purple-600/10 rounded-lg p-6 border border-cyan-400/30 hover:border-cyan-400/70 transition h-full shadow-lg shadow-cyan-400/5 hover:shadow-cyan-400/20"
+      whileHover={{ y: -6, scale: 1.02 }}
     >
-      <h3 className="text-xl font-semibold mb-3">{title}</h3>
+      <h3 className="text-lg font-semibold mb-3 text-white">{title}</h3>
       <p className="mb-4 text-sm leading-relaxed text-gray-300">{description}</p>
       {highlight && (
-        <p className="text-xs text-cyan-400 font-medium mb-4 italic">✓ {highlight}</p>
+        <p className="text-xs text-cyan-400 font-medium mb-4 italic flex items-center"><span className="mr-1">✓</span> {highlight}</p>
       )}
       <div className="flex flex-wrap gap-2">
         {tags.map((t) => (
           <span
             key={t}
-            className="text-xs bg-gray-600 px-2 py-1 rounded-full hover:bg-cyan-400/20 hover:text-cyan-400 transition"
+            className="text-xs bg-gradient-to-r from-cyan-400/20 to-blue-500/20 text-cyan-300 px-3 py-1 rounded-full hover:from-cyan-400/40 hover:to-blue-500/40 transition border border-cyan-400/30"
           >
             {t}
           </span>
