@@ -46,145 +46,166 @@ export default function Portfolio() {
         <div className="w-full max-w-6xl">
           <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Text Content */}
-            <motion.div
-              className="flex flex-col text-center md:text-left"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <motion.h1
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold glow mb-6 leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                ALI EISSA
-              </motion.h1>
-              <motion.p
-                className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                Penetration Tester focused on web and network security
-              </motion.p>
+            <div className="flex flex-col text-center md:text-left">
               <motion.div
-                className="flex gap-4 justify-center md:justify-start flex-wrap"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                variants={fadeInUp}
               >
-                <a
-                  href="#projects"
-                  className="px-8 py-3 bg-accent text-black rounded-lg font-semibold hover:scale-105 transform transition duration-300 shadow-lg shadow-cyan-400/20"
-                >
-                  Explore Projects
-                </a>
-                <a
-                  href="#contact"
-                  className="px-8 py-3 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-black transition duration-300 shadow-lg shadow-cyan-400/10"
-                >
-                  Contact
-                </a>
+                <div className="text-5xl sm:text-6xl lg:text-7xl font-bold glow mb-6 leading-tight">
+                  <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    ALI EISSA
+                  </motion.h1>
+                </div>
+                <div className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed">
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                  >
+                    Penetration Tester focused on web and network security
+                  </motion.p>
+                </div>
+                <div className="flex gap-4 justify-center md:justify-start flex-wrap">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
+                    <a
+                      href="#projects"
+                      className="px-8 py-3 bg-accent text-black rounded-lg font-semibold hover:scale-105 transform transition duration-300 shadow-lg shadow-cyan-400/20"
+                    >
+                      Explore Projects
+                    </a>
+                    <a
+                      href="#contact"
+                      className="px-8 py-3 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-black transition duration-300 shadow-lg shadow-cyan-400/10"
+                    >
+                      Contact
+                    </a>
+                  </motion.div>
+                </div>
               </motion.div>
-            </motion.div>
+            </div>
 
             {/* Profile Image with Cyber Effects */}
-            <motion.div
-              className="flex justify-center md:justify-end"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-            >
-              <div className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80">
-                {/* Outer Rotating Glow Ring */}
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 opacity-0 blur-xl"
-                  animate={{ opacity: [0.3, 0.6, 0.3] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  style={{ boxShadow: '0 0 40px rgba(0, 255, 255, 0.6)' }}
-                />
-
-                {/* Rotating Border Ring */}
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 p-1"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                >
-                  <div className="w-full h-full rounded-full bg-gray-900" />
-                </motion.div>
-
-                {/* Inner Container */}
-                <div className="absolute inset-1 rounded-full overflow-hidden border border-cyan-400/50">
-                  {/* Profile Image */}
-                  <Image
-                    src="/ali.jpg"
-                    alt="Ali Eissa"
-                    width={320}
-                    height={320}
-                    className="w-full h-full object-cover"
-                    priority
-                  />
-
-                  {/* Soft Inner Glow Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/10 to-transparent rounded-full" />
-                </div>
-
-                {/* Animated Floating Particles */}
-                {[0, 1, 2, 3].map((i) => (
+            <div className="flex justify-center md:justify-end">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+              >
+                <div className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80">
+                  {/* Outer Pulsing Glow Ring */}
                   <motion.div
-                    key={i}
-                    className="absolute w-2 h-2 bg-cyan-400 rounded-full"
-                    animate={{
-                      x: Math.cos((i / 4) * Math.PI * 2) * 100,
-                      y: Math.sin((i / 4) * Math.PI * 2) * 100,
-                      opacity: [0, 1, 0]
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: i * 0.5
-                    }}
+                    className="absolute inset-0 rounded-full"
                     style={{
-                      left: '50%',
-                      top: '50%',
-                      marginLeft: '-4px',
-                      marginTop: '-4px',
-                      filter: 'blur(1px)'
+                      boxShadow: '0 0 40px rgba(0, 255, 255, 0.4), 0 0 80px rgba(0, 255, 255, 0.2)'
                     }}
+                    animate={{
+                      boxShadow: [
+                        '0 0 40px rgba(0, 255, 255, 0.3), 0 0 80px rgba(0, 255, 255, 0.15)',
+                        '0 0 60px rgba(0, 255, 255, 0.5), 0 0 100px rgba(0, 255, 255, 0.25)',
+                        '0 0 40px rgba(0, 255, 255, 0.3), 0 0 80px rgba(0, 255, 255, 0.15)'
+                      ]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                   />
-                ))}
 
-                {/* Pulsing Corner Accents */}
-                {[
-                  'top-0 left-0',
-                  'top-0 right-0',
-                  'bottom-0 left-0',
-                  'bottom-0 right-0'
-                ].map((pos, i) => (
+                  {/* Rotating Border Ring */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 p-1">
+                    <motion.div
+                      className="w-full h-full rounded-full bg-gray-900"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+                    />
+                  </div>
+
+                  {/* Floating Squares - Decorative Elements */}
+                  {[
+                    { pos: '-top-3 -left-3', x: [0, 8, 0], y: [0, -8, 0], delay: 0 },
+                    { pos: '-top-3 -right-3', x: [0, -8, 0], y: [0, -8, 0], delay: 0.5 },
+                    { pos: '-bottom-3 -left-3', x: [0, 8, 0], y: [0, 8, 0], delay: 1 },
+                    { pos: '-bottom-3 -right-3', x: [0, -8, 0], y: [0, 8, 0], delay: 1.5 },
+                    { pos: 'top-1/2 left-0 -translate-y-1/2', x: [0, -12, 0], y: [0, 0, 0], delay: 0.3 },
+                    { pos: 'top-1/2 right-0 -translate-y-1/2', x: [0, 12, 0], y: [0, 0, 0], delay: 0.8 }
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className={`absolute w-2 h-2 bg-cyan-400/60 rounded-sm ${item.pos}`}
+                      animate={{
+                        x: item.x,
+                        y: item.y,
+                        opacity: [0.4, 0.8, 0.4]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        delay: item.delay,
+                        ease: 'easeInOut'
+                      }}
+                    />
+                  ))}
+
+                  {/* Inner Container */}
+                  <div className="absolute inset-1 rounded-full overflow-hidden border border-cyan-400/50">
+                    {/* Profile Image - Unchanged */}
+                    <Image
+                      src="/ali.jpg"
+                      alt="Ali Eissa"
+                      width={320}
+                      height={320}
+                      className="w-full h-full object-cover"
+                      priority
+                    />
+
+                    {/* Soft Inner Glow Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/10 to-transparent rounded-full" />
+                  </div>
+
+                  {/* Animated Corner Accents */}
+                  {[
+                    { pos: 'top-2 left-2', delay: 0 },
+                    { pos: 'top-2 right-2', delay: 0.5 },
+                    { pos: 'bottom-2 left-2', delay: 1 },
+                    { pos: 'bottom-2 right-2', delay: 1.5 }
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className={`absolute w-2 h-2 border border-cyan-400 ${item.pos}`}
+                      animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2.5, repeat: Infinity, delay: item.delay, ease: 'easeInOut' }}
+                    />
+                  ))}
+
+                  {/* Soft Shadow Glow */}
                   <motion.div
-                    key={i}
-                    className={`absolute w-3 h-3 border-2 border-cyan-400 ${pos}`}
-                    animate={{ opacity: [0.3, 0.8, 0.3] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
-                    style={{ transform: 'translate(0.75rem, 0.75rem)' }}
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      boxShadow: '0 0 60px rgba(0, 255, 255, 0.2), 0 0 100px rgba(0, 255, 255, 0.1)'
+                    }}
+                    animate={{
+                      boxShadow: [
+                        '0 0 50px rgba(0, 255, 255, 0.15), 0 0 80px rgba(0, 255, 255, 0.08)',
+                        '0 0 70px rgba(0, 255, 255, 0.25), 0 0 120px rgba(0, 255, 255, 0.12)',
+                        '0 0 50px rgba(0, 255, 255, 0.15), 0 0 80px rgba(0, 255, 255, 0.08)'
+                      ]
+                    }}
+                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                   />
-                ))}
-
-                {/* Soft Shadow Glow */}
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    boxShadow: `0 0 60px rgba(0, 255, 255, 0.25), 0 0 100px rgba(0, 255, 255, 0.15)`
-                  }}
-                />
-              </div>
-            </motion.div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -194,28 +215,30 @@ export default function Portfolio() {
         id="about"
         className="py-16 px-4 max-w-3xl mx-auto"
       >
-        <motion.h2
-          className="text-3xl font-semibold mb-6 text-center glow"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          About Me
-        </motion.h2>
-        <motion.p
-          className="text-lg leading-relaxed"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          I am a cybersecurity graduate with 4 years of learning and hands-on
-          practice in cybersecurity. I chose this field because I have a real
-          passion for understanding how attacks happen, how secure systems get
-          tested, and how data can be exposed and protected. My main focus
-          areas are web penetration testing and network security.
-        </motion.p>
+        <div className="text-3xl font-semibold mb-6 text-center glow">
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            About Me
+          </motion.h2>
+        </div>
+        <div className="text-lg leading-relaxed">
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            I am a cybersecurity graduate with 4 years of learning and hands-on
+            practice in cybersecurity. I chose this field because I have a real
+            passion for understanding how attacks happen, how secure systems get
+            tested, and how data can be exposed and protected. My main focus
+            areas are web penetration testing and network security.
+          </motion.p>
+        </div>
       </section>
 
       {/* Skills / Toolkit Section */}
@@ -223,32 +246,28 @@ export default function Portfolio() {
         id="skills"
         className="py-12 px-4 bg-gray-800"
       >
-        <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          Skills &amp; Toolkit
-        </motion.h2>
-        <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-gray-400 text-sm">
-            Core technical skills across penetration testing, vulnerability assessment, and security automation
-          </p>
-        </motion.div>
-        <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-w-4xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
+        <div className="text-3xl font-semibold mb-3 text-center glow">
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            Skills &amp; Toolkit
+          </motion.h2>
+        </div>
+        <div className="max-w-3xl mx-auto text-center mb-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-gray-400 text-sm">
+              Core technical skills across penetration testing, vulnerability assessment, and security automation
+            </p>
+          </motion.div>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-w-4xl mx-auto">
           {[
             'Python',
             'JavaScript',
@@ -264,35 +283,35 @@ export default function Portfolio() {
             'Kali Linux',
             'Windows'
           ].map((skill) => (
-            <div
+            <motion.div
               key={skill}
-              className="px-3 py-1.5 bg-gray-700/50 hover:bg-gray-700 rounded-full text-center text-xs font-medium transition"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
             >
-              {skill}
-            </div>
+              <div className="px-3 py-1.5 bg-gray-700/50 hover:bg-gray-700 rounded-full text-center text-xs font-medium transition">
+                {skill}
+              </div>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* Vulnerability Expertise */}
       <section id="vulnerability-focus" className="py-12 px-4">
-        <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          Vulnerability Expertise
-        </motion.h2>
+        <div className="text-3xl font-semibold mb-3 text-center glow">
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            Vulnerability Expertise
+          </motion.h2>
+        </div>
         <p className="text-center text-gray-400 text-sm mb-6">Hands-on practice across OWASP Top 10 categories</p>
-        <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-5xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-5xl mx-auto">
           {[
             { name: 'SQL Injection', labs: '15 labs', difficulty: 'Advanced' },
             { name: 'XSS', labs: '13 labs', difficulty: 'Advanced' },
@@ -305,45 +324,47 @@ export default function Portfolio() {
           ].map((vuln) => (
             <motion.div
               key={vuln.name}
-              className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 hover:border-cyan-400/60 transition"
-              whileHover={{ scale: 1.02 }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
             >
-              <p className="font-semibold text-sm">{vuln.name}</p>
-              <p className="text-xs text-cyan-400 mt-1">{vuln.labs}</p>
-              <p className="text-xs text-gray-500 mt-0.5">{vuln.difficulty}</p>
+              <div className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 hover:border-cyan-400/60 transition">
+                <motion.div whileHover={{ scale: 1.02 }}>
+                  <p className="font-semibold text-sm">{vuln.name}</p>
+                  <p className="text-xs text-cyan-400 mt-1">{vuln.labs}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{vuln.difficulty}</p>
+                </motion.div>
+              </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* Testing Methodology Section */}
       <section id="methodology" className="py-12 px-4 bg-gray-800">
-        <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          Testing Methodology
-        </motion.h2>
-        <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-gray-400 text-sm">
-            Structured 5-stage approach from reconnaissance to final reporting
-          </p>
-        </motion.div>
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 max-w-6xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
+        <div className="text-3xl font-semibold mb-3 text-center glow">
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            Testing Methodology
+          </motion.h2>
+        </div>
+        <div className="max-w-3xl mx-auto text-center mb-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-gray-400 text-sm">
+              Structured 5-stage approach from reconnaissance to final reporting
+            </p>
+          </motion.div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 max-w-6xl mx-auto">
           {[
             {
               step: 'Reconnaissance',
@@ -366,49 +387,56 @@ export default function Portfolio() {
               desc: 'Documentation with risk assessment'
             }
           ].map((item, i) => (
-            <div
+            <motion.div
               key={item.step}
-              className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border-l-4 border-cyan-400 transition"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
             >
-              <div className="flex items-center mb-1.5">
-                <span className="text-cyan-400 font-bold text-sm mr-2">{i + 1}</span>
-                <h3 className="font-semibold text-sm">{item.step}</h3>
+              <div className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border-l-4 border-cyan-400 transition">
+                <div className="flex items-center mb-1.5">
+                  <span className="text-cyan-400 font-bold text-sm mr-2">{i + 1}</span>
+                  <h3 className="font-semibold text-sm">{item.step}</h3>
+                </div>
+                <p className="text-xs text-gray-400">{item.desc}</p>
               </div>
-              <p className="text-xs text-gray-400">{item.desc}</p>
-            </div>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* Active Recon Commands */}
       <section id="recon-tools" className="py-12 px-4">
-        <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          Active Reconnaissance Tools
-        </motion.h2>
-        <motion.div
-          className="max-w-3xl mx-auto text-center mb-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-gray-400 text-sm">
-            Essential commands for subdomain discovery, port scanning, and web enumeration
-          </p>
-        </motion.div>
-        <motion.div
-          className="bg-gray-900 rounded-lg p-4 max-w-2xl mx-auto border border-cyan-400/30"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="space-y-2 font-mono text-xs">
+        <div className="text-3xl font-semibold mb-3 text-center glow">
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            Active Reconnaissance Tools
+          </motion.h2>
+        </div>
+        <div className="max-w-3xl mx-auto text-center mb-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-gray-400 text-sm">
+              Essential commands for subdomain discovery, port scanning, and web enumeration
+            </p>
+          </motion.div>
+        </div>
+        <div className="bg-gray-900 rounded-lg p-4 max-w-2xl mx-auto border border-cyan-400/30">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="space-y-2 font-mono text-xs">
             {[
               '$ subfinder -d target.com -o subs.txt',
               '$ amass enum -d target.com',
@@ -416,16 +444,19 @@ export default function Portfolio() {
               '$ ffuf -u https://target.com/FUZZ -w wordlist.txt',
               '$ nuclei -u https://target.com -t cves/'
             ].map((cmd, i) => (
-              <motion.div
+              <div
                 key={i}
                 className="text-cyan-400 py-1.5 border-l-2 border-cyan-400/50 pl-3"
-                initial={{ x: -20, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
               >
-                <span className="text-gray-600">{'>'}</span> {cmd}
-              </motion.div>
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <span className="text-gray-600">{'>'}</span> {cmd}
+                </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>
@@ -433,25 +464,27 @@ export default function Portfolio() {
 
       {/* Pentesting Timeline */}
       <section id="timeline" className="py-12 px-4 bg-gray-800">
-        <motion.h2
-          className="text-3xl font-semibold mb-3 text-center glow"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          Pentesting Timeline
-        </motion.h2>
-        <motion.div
-          className="max-w-3xl mx-auto text-center mb-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-gray-400 text-sm">
-            Growth progression from 2022 to present across certifications and hands-on labs
-          </p>
-        </motion.div>
+        <div className="text-3xl font-semibold mb-3 text-center glow">
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            Pentesting Timeline
+          </motion.h2>
+        </div>
+        <div className="max-w-3xl mx-auto text-center mb-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-gray-400 text-sm">
+              Growth progression from 2022 to present across certifications and hands-on labs
+            </p>
+          </motion.div>
+        </div>
         <div className="max-w-2xl mx-auto">
           {[
             { date: 'Jan 2022', event: 'CCNA Certification', type: 'Networking' },
@@ -460,24 +493,24 @@ export default function Portfolio() {
             { date: '2024', event: 'TryHackMe Top 5% · 55 Rooms', type: 'Hands-On' },
             { date: '2024–2026', event: 'PortSwigger Labs: 61 Labs Complete', type: 'Advanced Lab' }
           ].map((item, i) => (
-            <motion.div
-              key={i}
-              className="flex gap-4 mb-5"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <div className="flex flex-col items-center flex-shrink-0">
-                <div className="w-3 h-3 bg-cyan-400 rounded-full border border-cyan-400/50"></div>
-                {i < 4 && <div className="w-0.5 h-16 bg-gradient-to-b from-cyan-400/50 to-transparent my-1.5"></div>}
-              </div>
-              <div>
-                <p className="font-semibold text-cyan-400 text-sm">{item.date}</p>
-                <p className="text-gray-300 text-sm">{item.event}</p>
-                <p className="text-xs text-gray-500">{item.type}</p>
-              </div>
-            </motion.div>
+            <div key={i} className="flex gap-4 mb-5">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="flex flex-col items-center flex-shrink-0">
+                  <div className="w-3 h-3 bg-cyan-400 rounded-full border border-cyan-400/50"></div>
+                  {i < 4 && <div className="w-0.5 h-16 bg-gradient-to-b from-cyan-400/50 to-transparent my-1.5"></div>}
+                </div>
+                <div>
+                  <p className="font-semibold text-cyan-400 text-sm">{item.date}</p>
+                  <p className="text-gray-300 text-sm">{item.event}</p>
+                  <p className="text-xs text-gray-500">{item.type}</p>
+                </div>
+              </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -530,20 +563,18 @@ export default function Portfolio() {
               value: 'Security operations and threat analysis'
             }
           ].map((cert) => (
-            <motion.div
-              key={cert.cert}
-              className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 transition"
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className="flex items-start mb-2">
-                <Award className="w-4 h-4 text-cyan-400 mr-2 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-semibold text-sm">{cert.cert}</h4>
-                  <p className="text-xs text-gray-500">{cert.issuer} · {cert.year}</p>
+            <div key={cert.cert} className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 transition">
+              <motion.div whileHover={{ scale: 1.02 }}>
+                <div className="flex items-start mb-2">
+                  <Award className="w-4 h-4 text-cyan-400 mr-2 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-semibold text-sm">{cert.cert}</h4>
+                    <p className="text-xs text-gray-500">{cert.issuer} · {cert.year}</p>
+                  </div>
                 </div>
-              </div>
-              <p className="text-xs text-gray-400">{cert.value}</p>
-            </motion.div>
+                <p className="text-xs text-gray-400">{cert.value}</p>
+              </motion.div>
+            </div>
           ))}
         </motion.div>
       </section>
@@ -629,19 +660,18 @@ export default function Portfolio() {
                 rel="noopener noreferrer"
                 className="block"
               >
-                <motion.div
-                  className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 h-full transition"
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <div className="flex items-start mb-2">
-                    <Icon className="w-4 h-4 text-cyan-400 mr-2 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="font-semibold text-sm">{platform.name}</h4>
-                      <p className="text-xs text-cyan-400 font-medium">{platform.stat}</p>
+                <div className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 h-full transition">
+                  <motion.div whileHover={{ scale: 1.02 }}>
+                    <div className="flex items-start mb-2">
+                      <Icon className="w-4 h-4 text-cyan-400 mr-2 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-semibold text-sm">{platform.name}</h4>
+                        <p className="text-xs text-cyan-400 font-medium">{platform.stat}</p>
+                      </div>
                     </div>
-                  </div>
-                  <p className="text-xs text-gray-400">{platform.desc}</p>
-                </motion.div>
+                    <p className="text-xs text-gray-400">{platform.desc}</p>
+                  </motion.div>
+                </div>
               </a>
             );
           })}
@@ -675,15 +705,16 @@ export default function Portfolio() {
             { label: 'Certs', value: '3', detail: 'Current' },
             { label: 'Tools', value: '11+', detail: 'Proficient' }
           ].map((metric) => (
-            <motion.div
+            <div
               key={metric.label}
               className="bg-gray-700/60 hover:bg-gray-700 rounded-lg p-3 text-center border border-cyan-400/20 hover:border-cyan-400/50 transition"
-              whileHover={{ scale: 1.03 }}
             >
-              <p className="text-lg font-bold text-cyan-400">{metric.value}</p>
-              <p className="text-xs text-gray-300 font-medium mt-0.5">{metric.label}</p>
-              <p className="text-xs text-gray-500 mt-1">{metric.detail}</p>
-            </motion.div>
+              <motion.div whileHover={{ scale: 1.03 }}>
+                <p className="text-lg font-bold text-cyan-400">{metric.value}</p>
+                <p className="text-xs text-gray-300 font-medium mt-0.5">{metric.label}</p>
+                <p className="text-xs text-gray-500 mt-1">{metric.detail}</p>
+              </motion.div>
+            </div>
           ))}
         </motion.div>
       </section>
@@ -1166,17 +1197,18 @@ export default function Portfolio() {
           ].map((svc) => {
             const Icon = svc.icon;
             return (
-              <motion.div
+              <div
                 key={svc.service}
                 className="bg-gray-700/50 hover:bg-gray-700 rounded-lg p-3 border border-cyan-400/30 transition"
-                whileHover={{ scale: 1.02 }}
               >
-                <div className="flex items-center mb-2">
-                  <Icon className="w-4 h-4 text-cyan-400 mr-2" />
-                  <h4 className="font-semibold text-sm">{svc.service}</h4>
-                </div>
-                <p className="text-xs text-gray-400">{svc.description}</p>
-              </motion.div>
+                <motion.div whileHover={{ scale: 1.02 }}>
+                  <div className="flex items-center mb-2">
+                    <Icon className="w-4 h-4 text-cyan-400 mr-2" />
+                    <h4 className="font-semibold text-sm">{svc.service}</h4>
+                  </div>
+                  <p className="text-xs text-gray-400">{svc.description}</p>
+                </motion.div>
+              </div>
             );
           })}
         </motion.div>
@@ -1193,54 +1225,55 @@ export default function Portfolio() {
         >
           Get in Touch
         </motion.h2>
-        <motion.div
-          className="flex flex-col items-center space-y-2.5"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          <a
-            href="mailto:ali.eissa.cybersec@gmail.com"
-            className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
+        <div className="flex flex-col items-center space-y-2.5">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
           >
-            <Mail className="w-4 h-4" />
-            <span>ali.eissa.cybersec@gmail.com</span>
-          </a>
-          <a
-            href="https://wa.me/201021068767"
-            className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
-          >
-            <Smartphone className="w-4 h-4" />
-            <span>+201021068767</span>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/ali-eissa-cyber"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
-          >
-            <Linkedin className="w-4 h-4" />
-            <span>LinkedIn</span>
-          </a>
-          <a
-            href="https://github.com/ali-cybersec-sudo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
-          >
-            <Github className="w-4 h-4" />
-            <span>GitHub</span>
-          </a>
-          <a
-            href="/ALI_EISSA.pdf"
-            download
-            className="mt-3 px-4 py-2 bg-accent text-black rounded-md font-semibold text-sm hover:scale-105 transform transition inline-flex items-center"
-          >
-            <Download className="w-3.5 h-3.5 mr-1.5" />
-            Download CV
-          </a>
-        </motion.div>
+            <a
+              href="mailto:ali.eissa.cybersec@gmail.com"
+              className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
+            >
+              <Mail className="w-4 h-4" />
+              <span>ali.eissa.cybersec@gmail.com</span>
+            </a>
+            <a
+              href="https://wa.me/201021068767"
+              className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
+            >
+              <Smartphone className="w-4 h-4" />
+              <span>+201021068767</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/ali-eissa-cyber"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
+            >
+              <Linkedin className="w-4 h-4" />
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href="https://github.com/ali-cybersec-sudo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 text-sm hover:text-cyan-400 transition"
+            >
+              <Github className="w-4 h-4" />
+              <span>GitHub</span>
+            </a>
+            <a
+              href="/ALI_EISSA.pdf"
+              download
+              className="mt-3 px-4 py-2 bg-accent text-black rounded-md font-semibold text-sm hover:scale-105 transform transition inline-flex items-center"
+            >
+              <Download className="w-3.5 h-3.5 mr-1.5" />
+              Download CV
+            </a>
+          </motion.div>
+        </div>
       </section>
     </main>
   );
