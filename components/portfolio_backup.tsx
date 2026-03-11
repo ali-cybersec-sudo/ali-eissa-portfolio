@@ -109,11 +109,7 @@ export default function Portfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-    return () => {
-      document.documentElement.style.scrollBehavior = 'auto';
-    };
+    // any client side initializations if needed
   }, []);
 
   const navItems = [
@@ -128,15 +124,6 @@ export default function Portfolio() {
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'Contact', href: '#contact' }
   ];
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setMobileMenuOpen(false);
-  };
 
   return (
     <>
@@ -153,7 +140,7 @@ export default function Portfolio() {
               transition={{ duration: 0.5 }}
               className="flex-shrink-0"
             >
-              <a href="#cover" onClick={(e) => handleNavClick(e, '#cover')} className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 glow">
+              <a href="#cover" className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 glow">
                 ALI EISSA
               </a>
             </motion.div>
@@ -169,7 +156,7 @@ export default function Portfolio() {
                 >
                   <a
                     href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
+                    onClick={() => setMobileMenuOpen(false)}
                     className="text-sm font-medium text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md transition duration-300 hover:bg-cyan-400/10 border border-transparent hover:border-cyan-400/30"
                   >
                     {item.name}
@@ -204,7 +191,7 @@ export default function Portfolio() {
                 <a
                   key={item.name}
                   href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-sm font-medium text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md transition duration-300 hover:bg-cyan-400/10"
                 >
                   {item.name}
@@ -262,14 +249,12 @@ export default function Portfolio() {
                     >
                       <a
                         href="#projects"
-                        onClick={(e) => handleNavClick(e, '#projects')}
                         className="px-8 py-3 bg-accent text-black rounded-lg font-semibold hover:scale-105 transform transition duration-300 shadow-lg shadow-cyan-400/30 hover:shadow-cyan-400/50"
                       >
                         Explore Projects
                       </a>
                       <a
                         href="#contact"
-                        onClick={(e) => handleNavClick(e, '#contact')}
                         className="px-8 py-3 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-black transition duration-300 shadow-lg shadow-cyan-400/10 hover:shadow-cyan-400/30"
                       >
                         Get in Touch
@@ -428,7 +413,7 @@ export default function Portfolio() {
         {/* 3. EDUCATION SECTION */}
         <section
           id="education"
-          className="py-20 px-4 bg-gradient-to-b from-gray-900 to-gray-800/50 border-y border-cyan-400/10"
+          className="py-20 px-4 bg-gradient-to-b from-dark to-gray-800/50 border-y border-cyan-400/10"
         >
           <div className="text-3xl font-semibold mb-3 text-center">
             <motion.h2
@@ -461,10 +446,10 @@ export default function Portfolio() {
           >
             {[
               {
-                degree: 'Bachelor of Artificial Intelligence',
-                institution: 'Cybersecurity Department',
-                period: 'Expected Graduation: 2026',
-                detail: 'Focused on cybersecurity, penetration testing, network security, and vulnerability assessment with strong foundations in AI and secure systems.'
+                degree: 'Bachelor of Science in Cybersecurity',
+                institution: 'Cybersecurity Graduate Program',
+                period: '4 Years',
+                detail: 'Comprehensive training in network security, application security, and security operations'
               }
             ].map((edu, i) => (
               <div key={i} className="bg-gradient-to-br from-cyan-400/10 to-purple-600/5 hover:from-cyan-400/15 hover:to-purple-600/10 rounded-lg p-6 border border-cyan-400/30 hover:border-cyan-400/70 transition shadow-lg shadow-cyan-400/5 hover:shadow-cyan-400/20 mb-4">
@@ -566,7 +551,7 @@ export default function Portfolio() {
         {/* 5. EXPERIENCE SECTION */}
         <section
           id="experience"
-          className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-gray-900 border-y border-cyan-400/10"
+          className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-dark border-y border-cyan-400/10"
         >
           <div className="text-3xl font-semibold mb-3 text-center">
             <motion.h2
@@ -760,7 +745,7 @@ export default function Portfolio() {
         </section>
 
         {/* 7. PROJECTS SECTION */}
-        <section id="projects" className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-gray-900 border-y border-cyan-400/10">
+        <section id="projects" className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-dark border-y border-cyan-400/10">
           <motion.h2
             className="text-3xl font-semibold mb-3 text-center text-cyan-400 glow"
             initial="hidden"
@@ -850,7 +835,7 @@ export default function Portfolio() {
                       <Award className="w-5 h-5 text-cyan-400 mr-2 flex-shrink-0 mt-0.5" />
                       <div>
                         <h4 className="font-semibold text-sm text-white">{cert.cert}</h4>
-                        <p className="text-xs text-gray-400">{cert.issuer} · {cert.year}</p>
+                        <p className="text-xs text-gray-400">{cert.issuer} Â· {cert.year}</p>
                       </div>
                     </div>
                     <p className="text-xs text-gray-300">{cert.value}</p>
@@ -965,7 +950,7 @@ export default function Portfolio() {
                         transition={{ duration: 1 }}
                       />
                     </motion.div>
-                    <p className="text-xs text-cyan-400 mt-0.5">✓ Completed</p>
+                    <p className="text-xs text-cyan-400 mt-0.5">âœ“ Completed</p>
                   </div>
                 ))}
                 <div className="pt-3 border-t border-cyan-400/20 mt-3">
@@ -977,7 +962,7 @@ export default function Portfolio() {
         </section>
 
         {/* 9. TESTIMONIALS SECTION */}
-        <section id="testimonials" className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-gray-900 border-y border-cyan-400/10">
+        <section id="testimonials" className="py-20 px-4 bg-gradient-to-b from-gray-800/50 to-dark border-y border-cyan-400/10">
           <motion.h2
             className="text-3xl font-semibold mb-3 text-center text-cyan-400 glow"
             initial="hidden"
@@ -1065,7 +1050,7 @@ export default function Portfolio() {
             viewport={{ once: true }}
           >
             <p className="text-gray-400 text-sm">
-              Ready to strengthen your security posture? Let&apos;s work together on your next penetration test or security assessment.
+              Ready to strengthen your security posture? Let's work together on your next penetration test or security assessment.
             </p>
           </motion.div>
           <div className="flex flex-col items-center space-y-3">
@@ -1126,7 +1111,7 @@ export default function Portfolio() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <p className="text-xs text-gray-500">© 2024 Ali Eissa. All rights reserved. | Cybersecurity Professional</p>
+            <p className="text-xs text-gray-500">Â© 2024 Ali Eissa. All rights reserved. | Cybersecurity Professional</p>
           </motion.div>
         </section>
       </main>
@@ -1168,4 +1153,3 @@ function ProjectCard({
     </motion.div>
   );
 }
-
